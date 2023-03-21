@@ -1,15 +1,6 @@
 ARG BASE
 FROM mcr.microsoft.com/windows:$BASE
 
-# Download the Media Feature Pack installer
-# ADD https://www.microsoft.com/en-us/software-download/mediafeaturepack /MFP.iso
-
-# # Mount the ISO and install the Media Feature Pack
-# RUN mkdir C:\MFP
-# RUN powershell -Command "Mount-DiskImage -ImagePath C:\MFP.iso"
-# RUN powershell -Command "Start-Process Dism.exe -ArgumentList '/Online /Add-Package /PackagePath:C:\MFP\Microsoft-Windows-MediaFeaturePack-OOB-Package.cab' -Wait"
-# RUN powershell -Command "Dismount-DiskImage -ImagePath C:\MFP.iso"
-
 # Install Chocolatey
 RUN powershell -Command \
   Set-ExecutionPolicy Bypass -Scope Process -Force; \
@@ -23,7 +14,6 @@ ARG src="GoogleChromePortable64"
 ARG target="C:\Program Files\Google\Chrome\Application"
 COPY ${src} ${target}
 
-#COPY C:\Users\MarcoKreeft\Downloads\GoogleChromePortable64 'C:\Program Files\Google\Chrome\Application'
 # Install Chrome, ChromeDriver, Python, and pip
 RUN choco install googlechrome -y
 RUN choco install chromedriver -y
